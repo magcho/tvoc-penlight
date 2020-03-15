@@ -4,7 +4,8 @@ espOtaUploader := ~/Library/Arduino15/packages/esp8266/hardware/esp8266/2.6.3/to
 binName := penlight
 
 serialPort := /dev/cu.wchusbserial141130
-hostIp := 192.168.2.100
+# serialPort := /dev/cu.usbserial-DM01P2EB
+hostIp := 192.168.11.4
 
 
 build: *.ino
@@ -19,8 +20,8 @@ upload:
 		--chip esp8266 \
 		--port  $(serialPort) \
 		--baud 115200 \
-		--before default_reset \
-		--after hard_reset \
+		--before no_reset \
+		--after soft_reset \
 		write_flash 0x0 ./$(binName).bin
 
 ota_upload:

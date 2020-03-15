@@ -12,7 +12,9 @@
 #define R 14
 #define G 12
 #define B 4
-#define led 2
+
+#define MDNS_NAME "TVoC01"
+//#define led 4
 
 WiFiUDP UdpSend;
 ArtnetWifi artnet;
@@ -23,8 +25,8 @@ const char* ssid = STASSID;
 const char* password = STAPSK;
 
 void setup() {
-  pinMode(led, OUTPUT);
-  digitalWrite(led, HIGH);
+  //pinMode(led, OUTPUT);
+  //digitalWrite(led, HIGH);
   
   Serial.begin(115200);
   Serial.println("Booting");
@@ -40,7 +42,7 @@ void setup() {
   // ArduinoOTA.setPort(8266);
 
   // Hostname defaults to esp8266-[ChipID]
-  ArduinoOTA.setHostname("TVoC001");
+  ArduinoOTA.setHostname(MDNS_NAME);
 
   // No authentication by default
   // ArduinoOTA.setPassword("admin");
@@ -84,7 +86,7 @@ void setup() {
   Serial.println("Ready");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
-  digitalWrite(led, LOW);
+  //digitalWrite(led, LOW);
 
 
 
@@ -129,8 +131,6 @@ void setup() {
 
 void loop() {
   ArduinoOTA.handle();
-  digitalWrite(led, LOW);
-
   //
   //
   artnet.read();
